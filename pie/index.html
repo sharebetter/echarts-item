@@ -1,0 +1,35 @@
+<!--
+ * @Author: 曾海明
+ * @Date: 2021-10-26 15:08:36
+ * @LastEditors: 曾海明
+ * @LastEditTime: 2022-01-17 10:48:05
+ * @Description:
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>饼图</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <div id="app">
+    <div class="pie-wrap">
+      <div class="pie-tip-wrap">
+        <div class="tip" v-text="pieItem.name"></div>
+        <div class="money" v-text="pieItem.money"></div>
+        <div class="unit" v-text="pieItem.unit"></div>
+      </div>
+      <div id="pie"></div>
+    </div>
+  </div>
+  <script src="../echarts.min.js"></script>
+  <!-- vue文件 -->
+  <script src="../vue-min.js"></script>
+  <!-- vue 代码 -->
+  <script src="./js/index.js"></script>
+</body>
+</html>

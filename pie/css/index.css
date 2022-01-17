@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+.pie-wrap {
+  position: relative;
+  width: 600px;
+  height: 450px;
+  margin: 150px auto;
+  border: 1px solid #ddd;
+}
+.pie-wrap .pie-tip-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.pie-wrap .pie-tip-wrap .tip,
+.pie-wrap .pie-tip-wrap .unit {
+  font-size: 18px;
+  font-weight: 400;
+  color: #999;
+}
+.pie-wrap .pie-tip-wrap .money {
+  font-size: 22px;
+  color: #333;
+  font-weight: bold;
+  margin: 8px 0;
+}
+.pie-wrap #pie {
+  width: 600px;
+  height: 450px;
+  margin: 0 auto;
+}

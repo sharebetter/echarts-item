@@ -1,0 +1,284 @@
+<!--
+ * @Author: 曾海明
+ * @Date: 2021-10-26 15:08:36
+ * @LastEditors: 曾海明
+ * @LastEditTime: 2022-01-15 10:53:04
+ * @Description:
+-->
+<!--
+ * @Author: 曾海明
+ * @Date: 2021-10-26 15:08:36
+ * @LastEditors: 曾海明
+ * @LastEditTime: 2022-01-11 15:29:12
+ * @Description:
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./echarts.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script> -->
+  <script src="./china.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    #main,
+    .ring-wrap {
+      width: 600px;
+      height: 450px;
+      margin: 150px auto;
+      border: 1px solid #ddd;
+    }
+
+    #ring {
+      width: 600px;
+      height: 450px;
+    }
+
+    .ring-wrap {
+      position: relative;
+      text-align: center;
+    }
+
+    .tip-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .tip, .unit {
+      font-size: 10px;
+      font-weight: 400;
+      color: #999999;
+    }
+    .money{
+      font-size: 14px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /*默认长宽比0.75*/
+  </style>
+</head>
+<body>
+  <div id="main"></div>
+  <div class="ring-wrap">
+    <div class="tip-wrap">
+      <div class="tip">授信总额度</div>
+      <div class="money">20000</div>
+      <div class="unit">万元</div>
+    </div>
+    <div id="ring"></div>
+  </div>
+  <script type="text/javascript">
+    var dataList = [
+      { name: "南海诸岛", value: 0 },
+      { name: '北京', value: [116.46, 39.92, 0], text: '冰岛XXXXX冷库' },
+      { name: '天津', value: 0 },
+      { name: '上海', value: 0 },
+      { name: '重庆', value: 0 },
+      { name: '河北', value: 0 },
+      { name: '河南', value: 0 },
+      { name: '云南', value: 0 },
+      { name: '辽宁', value: 0 },
+      { name: '黑龙江', value: 0 },
+      { name: '湖南', value: 0 },
+      { name: '安徽', value: 0 },
+      { name: '山东', value: 0 },
+      { name: '新疆', value: 0 },
+      { name: '江苏', value: 0 },
+      { name: '浙江', value: 0 },
+      { name: '江西', value: 0 },
+      { name: '湖北', value: 0 },
+      { name: '广西', value: 0 },
+      { name: '甘肃', value: 0 },
+      { name: '山西', value: 0 },
+      { name: '内蒙古', value: 0 },
+      { name: '陕西', value: 0 },
+      { name: '吉林', value: 0 },
+      { name: '福建', value: 0 },
+      { name: '贵州', value: 0 },
+      { name: '广东', value: 0 },
+      { name: '青海', value: 1 },
+      { name: '西藏', value: 0 },
+      { name: '四川', value: 2 },
+      { name: '宁夏', value: 0 },
+      { name: '海南', value: 0 },
+      { name: '台湾', value: 0 },
+      { name: '香港', value: 0 },
+      { name: '澳门', value: 0 }
+    ]
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+      tooltip: {
+        formatter: function (params, ticket, callback) {
+          return (params.data && params.data.text) || ""
+        }//数据格式化
+      },
+      visualMap: {
+        min: 0,
+        max: 0,
+        // left: 'left',
+        // top: 'bottom',
+        // text: ['高','低'],//取值范围的文字
+        inRange: {
+          color: ['#FFE300']//取值范围的颜色
+        },
+        show: false//图注
+      },
+      geo: {
+        map: 'china',
+        roam: false,//不开启缩放和平移
+        zoom: 1.23,//视角缩放比例
+        label: {
+          normal: {
+            show: true,
+            fontSize: '10',
+            color: 'rgba(0,0,0,0.7)'
+          }
+        },
+        itemStyle: {
+          normal: {
+            areaColor: '#579CFB',
+            borderColor: 'rgba(0, 0, 0, 0.2)'
+          },
+          emphasis: {
+            areaColor: '#F3B329',//鼠标选择区域颜色
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 20,
+            borderWidth: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      },
+      series: [
+        {
+          name: '信息',
+          // type: 'map',
+          // geoIndex: 0,
+          type: 'scatter', //标注圆点
+          coordinateSystem: 'geo',
+          data: dataList
+        }
+      ]
+    };
+    myChart.setOption(option);
+    myChart.on('click', function (params) {
+      alert(params.name);
+    });
+  </script>
+  <script>
+    var chartDom = document.getElementById('ring');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    var data = [
+      { name: '已用额度', value: 5.6 },
+      { name: '贸易融资额度', value: 1 },
+      { name: '低风险额度', value: 0.8 },
+      { name: '流动资金贷款额度', value: 0.5 },
+      { name: '供应链融资额度', value: 0.5 },
+      { name: '可用额度', value: 3.8 }
+    ];
+    const a = {}
+    console.log(a)
+    option = {
+      // title: {
+      //   text: '阅读书籍分布',
+      //   x: '20%',//水平安放位置，默认为'left'，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）
+      //       y: 'top',
+      //   textStyle: {
+      //     color: '#333333',
+      //     fontWeight: 'normal',
+      //     fontSize: 14
+      //   }
+      // },
+      // graphic: [{
+      //   type: 'text',
+      //   left: '34%',
+      //   top: '55%',
+      //   z: 10,
+      //   style: {
+      //     fill: '#1a1a1a',
+      //     text: '23432',
+      //     font: '16px Microsoft YaHei'
+      //   }
+      // }],
+      color: ['#579CFB', '#37CFBD', '#4CCB72', '#FDAB67', '#FF7D7D', '#AF76FF'],
+      series: [{
+        type: 'pie',
+        radius: ['45%', '70%'],
+        left: 'center',
+        itemStyle: {
+          borderColor: '#fff',
+          borderWidth: 1
+        },
+        label: {
+          alignTo: 'edge',
+          // formatter: '{name|{b}}',
+          formatter: function (params) {
+            if (params.name.length > 4) {
+              return '{label|' + params.name.slice(0, 4) + "\n" + params.name.slice(5) + '}'
+            } else {
+              return '{label|' + params.name.slice(0) + '}'
+            }
+          },
+          minMargin: 5,
+          edgeDistance: 10,
+          lineHeight: 15,
+          rich: {
+            label: {
+              fontSize: 13,
+              color: '#666'
+            }
+          }
+        },
+        labelLine: {
+          length: 15,
+          length2: 50,
+          maxSurfaceAngle: 80
+          // normal: {
+          //   length: 50
+          // }
+        },
+        labelLayout: function (params) {
+          const isLeft = params.labelRect.x < myChart.getWidth() / 2;
+          const points = params.labelLinePoints;
+          // Update the end point.
+          points[2][0] = isLeft
+            ? params.labelRect.x
+            : params.labelRect.x + params.labelRect.width;
+          return {
+            labelLinePoints: points
+          };
+        },
+        data: data
+      }]
+    }
+    myChart.on('mouseover', (params) => {
+
+
+    })
+    myChart.on('mouseout', (params) => {
+
+    })
+
+
+    option && myChart.setOption(option);
+  </script>
+</body>
+</html>
